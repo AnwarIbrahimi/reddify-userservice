@@ -12,7 +12,7 @@ namespace UserService.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=mssqlstud.fhict.local;Database=dbi465821_content;User Id=dbi465821_content;Password=Voucugklir2;TrustServerCertificate=True");
+            optionsBuilder.UseSqlServer(@"Server=mssqlstud.fhict.local;Database=dbi465821_user;User Id=dbi465821_user;Password=Voucugklir2;TrustServerCertificate=True");
         }
 
     }

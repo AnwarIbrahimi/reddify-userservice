@@ -43,7 +43,7 @@ namespace UserService.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("users");
                 });
 #pragma warning restore 612, 618
         }

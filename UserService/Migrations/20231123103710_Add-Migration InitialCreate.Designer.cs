@@ -11,8 +11,8 @@ using UserService.Data;
 namespace UserService.Migrations
 {
     [DbContext(typeof(UserContext))]
-    [Migration("20231122100035_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20231123103710_Add-Migration InitialCreate")]
+    partial class AddMigrationInitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -46,7 +46,7 @@ namespace UserService.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("users");
                 });
 #pragma warning restore 612, 618
         }
