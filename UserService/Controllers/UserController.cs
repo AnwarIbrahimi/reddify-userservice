@@ -19,7 +19,7 @@ namespace UserService.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet]
+        [HttpGet("all")]
         public ActionResult<IEnumerable<UserReadDTO>> GetAllUsers()
         {
             Console.WriteLine("--> Getting Users.....");
@@ -43,7 +43,7 @@ namespace UserService.Controllers
         }
 
 
-        [HttpPost]
+        [HttpPost("post")]
         public ActionResult<UserReadDTO> CreateUser(UserCreateDTO user)
         {
             var userModel = _mapper.Map<User>(user);
