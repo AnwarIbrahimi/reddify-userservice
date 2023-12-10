@@ -22,7 +22,7 @@ jobs:
         dotnet-version: 6.0.x
 
     - name: Restore dependencies
-      run: dotnet restore ./Userservice/Userservice.csproj
+      run: dotnet restore
 
     - name: Build
       run: dotnet build ./UserService/Userservice.csproj --no-restore
