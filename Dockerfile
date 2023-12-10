@@ -12,7 +12,7 @@ RUN dotnet restore ./UserService/UserService.csproj
 COPY . ./
 
 # Build the application
-RUN dotnet publish -c Release -o out
+RUN dotnet publish ./UserService/Userservice.csproj -c Release -o out
 
 # Use the official .NET runtime image as the final base image
 FROM mcr.microsoft.com/dotnet/aspnet:6.0
