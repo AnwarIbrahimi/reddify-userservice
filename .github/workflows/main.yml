@@ -22,13 +22,13 @@ jobs:
         dotnet-version: 6.0.x
 
     - name: Restore dependencies
-      run: dotnet restore ./reddify-userservice/UserService/Userservice.csproj
+      run: dotnet restore ./UserService/UserService.csproj
 
     - name: Build
-      run: dotnet build ./UserService/Userservice.csproj --no-restore
+      run: dotnet build ./UserService/UserService.csproj --no-restore
 
     - name: Test
-      run: dotnet test ./UserService/Userservice.csproj --no-build --verbosity normal
+      run: dotnet test ./UserService/UserService.csproj --no-build --verbosity normal
 
     - name: Build and push Docker image
       run: |
