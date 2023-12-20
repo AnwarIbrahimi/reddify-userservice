@@ -12,7 +12,7 @@ namespace UserService.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=mssqlstud.fhict.local;Database=dbi465821_user;User Id=dbi465821_user;Password=Voucugklir2;TrustServerCertificate=True");
+            optionsBuilder.UseNpgsql("Host=postgres-service-user;Database=mydatabase;Username=myuser;Password=mypassword;");
         }
 
     }
