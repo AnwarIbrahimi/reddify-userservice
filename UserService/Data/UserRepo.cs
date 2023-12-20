@@ -16,18 +16,18 @@ namespace UserService.Data
                 throw new ArgumentNullException(nameof(user));
             }
 
-            _context.users.Add(user);
+            _context.user.Add(user);
 
         }
 
         public IEnumerable<User> GetAllUsers()
         {
-            return _context.users.ToList();
+            return _context.user.ToList();
         }
 
         public User GetUserByID(int id)
         {
-            return _context.users.FirstOrDefault(p => p.Id == id);
+            return _context.user.FirstOrDefault(p => p.Id == id);
         }
 
         public bool saveChanges()
