@@ -6,9 +6,9 @@ namespace UserService.Data
     {
         bool saveChanges();
 
-        IEnumerable<User> GetAllUsers();
-        User GetUserByID(int id);
-        void CreateUser(User user);
+        IEnumerable<Users> GetAllUsers();
+        Users GetUserByID(int id);
+        void CreateUser(Users user);
 
     }
 }

@@ -8,8 +8,8 @@ namespace UserService.Mapper
     {
         public UserMapper()
         {
-            CreateMap<User, UserReadDTO>();
-            CreateMap<UserCreateDTO, User>();
+            CreateMap<Users, UserReadDTO>();
+            CreateMap<UserCreateDTO, Users>();
         }
     }
 }

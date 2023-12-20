@@ -46,7 +46,7 @@ namespace UserService.Controllers
         [HttpPost("post")]
         public ActionResult<UserReadDTO> CreateUser(UserCreateDTO user)
         {
-            var userModel = _mapper.Map<User>(user);
+            var userModel = _mapper.Map<Users>(user);
             _repository.CreateUser(userModel);
             _repository.saveChanges();
 

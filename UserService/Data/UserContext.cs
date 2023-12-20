@@ -8,7 +8,7 @@ namespace UserService.Data
         public UserContext(DbContextOptions<UserContext> options) : base(options)
         { 
         }
-        public DbSet<User> user { get; set; } = null!;
+        public DbSet<Users> users { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

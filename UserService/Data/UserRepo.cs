@@ -9,25 +9,25 @@ namespace UserService.Data
         {
             _context = context;
         }
-        public void CreateUser(User user)
+        public void CreateUser(Users user)
         {
             if (user == null)
             {
                 throw new ArgumentNullException(nameof(user));
             }
 
-            _context.user.Add(user);
+            _context.users.Add(user);
 
         }
 
-        public IEnumerable<User> GetAllUsers()
+        public IEnumerable<Users> GetAllUsers()
         {
-            return _context.user.ToList();
+            return _context.users.ToList();
         }
 
-        public User GetUserByID(int id)
+        public Users GetUserByID(int id)
         {
-            return _context.user.FirstOrDefault(p => p.Id == id);
+            return _context.users.FirstOrDefault(p => p.Id == id);
         }
 
         public bool saveChanges()

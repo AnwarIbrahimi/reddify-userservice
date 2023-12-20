@@ -2,7 +2,7 @@
 
 namespace UserService.Models
 {
-    public class User
+    public class Users
     {
         [Key]
         [Required]
