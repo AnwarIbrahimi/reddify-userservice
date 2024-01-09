@@ -32,6 +32,6 @@ jobs:
 
     - name: Build and push Docker image
       run: |
-        docker build -t anwarict/userservices .
+        docker build -t anwarict/userservicess .
         docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-        docker push anwarict/userservices:latest
+        docker push anwarict/userservicess:latest

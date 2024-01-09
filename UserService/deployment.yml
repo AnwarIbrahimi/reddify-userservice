@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: userservice
-        image: anwarict/userservices
+        image: anwarict/userservicess
         ports:
         - containerPort: 80
