@@ -18,6 +18,12 @@ builder.Services.AddDbContext<UserContext>(options =>
 
 var app = builder.Build();
 
+using (var scope = app.Services.CreateScope())
+{
+    using var context = scope.ServiceProvider.GetRequiredService<UserContext>();
+    context.Database.EnsureCreated();
+}
+
 // Configure the HTTP request pipeline.
 
 app.UseSwagger();
