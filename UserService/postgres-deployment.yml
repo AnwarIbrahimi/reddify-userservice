@@ -6,14 +6,14 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: postgres-user
+      app: userservice
   template:
     metadata:
       labels:
-        app: postgres-user
+        app: userservice
     spec:
       containers:
-        - name: postgres-user
+        - name: userservice
           image: postgres:latest
           env:
             - name: POSTGRES_USER
@@ -23,7 +23,7 @@ spec:
             - name: POSTGRES_DB
               value: mydatabase
           ports:
-            - containerPort: 5433
+            - containerPort: 5432
           volumeMounts:
           - mountPath: /var/lib/postgresql/data
             name: postgres-pv-claim
@@ -38,8 +38,8 @@ metadata:
   name: postgres-user
 spec:
   selector:
-    app: postgres-user 
+    app: userservice
   ports:
     - protocol: TCP
-      port: 5433
+      port: 5432
       targetPort: 5432
