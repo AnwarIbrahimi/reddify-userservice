@@ -23,7 +23,7 @@ spec:
             - name: POSTGRES_DB
               value: mydatabase
           ports:
-            - containerPort: 5432
+            - containerPort: 5433
           volumeMounts:
           - mountPath: /var/lib/postgresql/data
             name: postgres-pv-claim
@@ -41,5 +41,5 @@ spec:
     app: userservice
   ports:
     - protocol: TCP
-      port: 5432
+      port: 5433
       targetPort: 5432
