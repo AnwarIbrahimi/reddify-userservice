@@ -43,16 +43,35 @@ namespace UserService.Controllers
         }
 
 
-        [HttpPost("post")]
+        [HttpPost("createUser")]
         public ActionResult<UserReadDTO> CreateUser(UserCreateDTO user)
         {
-            var userModel = _mapper.Map<Users>(user);
-            _repository.CreateUser(userModel);
-            _repository.saveChanges();
+            try
+            {
+                // Extract user data from the request
+                string uid = user.Uid;  // Assuming your UserCreateDTO contains a property for UID
+                string email = user.Email;  // Assuming your UserCreateDTO contains a property for Email
+                                            // Add other user properties as needed
 
-            var userReadDTO = _mapper.Map<UserReadDTO>(userModel);
+                // Perform operations to store the user data in your user database
+                // Example:
+                var userModel = _mapper.Map<Users>(user);
+                userModel.Uid = uid;
+                userModel.Email = email;
 
-            return CreatedAtRoute(nameof(GetUserByID), new { Id = userReadDTO.Id }, userReadDTO);
+                _repository.CreateUser(userModel);
+                _repository.saveChanges();
+
+                var userReadDTO = _mapper.Map<UserReadDTO>(userModel);
+
+                return CreatedAtRoute(nameof(GetUserByID), new { Id = userReadDTO.Id }, userReadDTO);
+            }
+            catch (Exception ex)
+            {
+                // Handle any exceptions or errors that may occur during user creation
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
         }
+
     }
 }

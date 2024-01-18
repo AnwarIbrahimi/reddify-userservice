@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: userservice
-        image: anwarict/reddifysuserss
+        image: anwarict/serviceuser
         ports:
         - containerPort: 5118

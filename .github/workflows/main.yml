@@ -32,6 +32,6 @@ jobs:
 
     - name: Build and push Docker image
       run: |
-        docker build -t anwarict/reddifysuserss .
+        docker build -t anwarict/serviceuser .
         docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-        docker push anwarict/reddifysuserss:latest
+        docker push anwarict/serviceuser:latest
