@@ -9,6 +9,7 @@ namespace UserService.Data
         IEnumerable<Users> GetAllUsers();
         Users GetUserByID(int id);
         void CreateUser(Users user);
+        void DeleteUser(Users user);
 
     }
 }

@@ -20,6 +20,11 @@ namespace UserService.Data
 
         }
 
+        public void DeleteUser(Users user)
+        {
+            _context.users.Remove(user);
+        }
+
         public IEnumerable<Users> GetAllUsers()
         {
             return _context.users.ToList();

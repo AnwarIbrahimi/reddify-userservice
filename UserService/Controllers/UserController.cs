@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using UserService.Data;
 using UserService.DTO;
 using UserService.Models;
+using UserService.RabbitMQ;
 
 namespace UserService.Controllers
 {
@@ -12,11 +13,15 @@ namespace UserService.Controllers
     {
         private readonly IUserRepo _repository;
         private readonly IMapper _mapper;
+        private readonly IConfiguration _configuration;
+        private readonly IMessageBusClient _messageBusClient;
 
-        public UserController(IUserRepo repository, IMapper mapper)
+        public UserController(IUserRepo repository, IMapper mapper, IConfiguration configuration, IMessageBusClient messageBusClient)
         {
             _repository = repository;
             _mapper = mapper;
+            _configuration = configuration;
+            _messageBusClient = messageBusClient;
         }
 
         [HttpGet("all")]
@@ -72,6 +77,37 @@ namespace UserService.Controllers
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
+        [HttpDelete("deleteUser/{id}")]
+        public ActionResult DeleteUser(int id)
+        {
+            try
+            {
+                var userItem = _repository.GetUserByID(id);
+                if (userItem == null)
+                {
+                    return NotFound();
+                }
 
+                // Publish message to RabbitMQ for user deletion
+                var deleteUserDto = new DeleteUserDTO
+                {
+                    UserId = userItem.Id,
+                    Uid = userItem.Uid
+                };
+
+                _messageBusClient.PublishUserDeletion(deleteUserDto);
+
+                // Delete the user from the user repository
+                _repository.DeleteUser(userItem);
+                _repository.saveChanges();
+
+                return NoContent(); // Successful deletion
+            }
+            catch (Exception ex)
+            {
+                // Handle any exceptions or errors that may occur during user deletion
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
     }
 }
