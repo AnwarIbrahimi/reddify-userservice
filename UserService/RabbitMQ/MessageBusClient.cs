@@ -39,11 +39,10 @@ namespace UserService.RabbitMQ
 
         public void PublishUserDeletion(string deleteuser)
         {
-            var message = JsonSerializer.Serialize(deleteuser);
             if (_connection.IsOpen)
             {
                 Console.WriteLine("--> RabbitMQ Connection Open, sending user deletion message...");
-                SendMessage(message, "user_deletion_queue"); // Specify the appropriate queue name
+                SendMessage(deleteuser, "user_deletion_queue"); // Specify the appropriate queue name
             }
             else
             {
