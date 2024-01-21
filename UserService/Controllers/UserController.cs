@@ -77,25 +77,23 @@ namespace UserService.Controllers
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
-        [HttpDelete("deleteUser/{id}")]
-        public ActionResult DeleteUser(int id)
+        [HttpDelete("deleteUser/{uid}")]
+        public ActionResult DeleteUser(string uid)
         {
             try
             {
-                var userItem = _repository.GetUserByID(id);
+                // Find the user by UID
+                var userItem = _repository.GetUserByUid(uid);
+
                 if (userItem == null)
                 {
                     return NotFound();
                 }
 
-                // Publish message to RabbitMQ for user deletion
-                var deleteUserDto = new DeleteUserDTO
-                {
-                    UserId = userItem.Id,
-                    Uid = userItem.Uid
-                };
+                string userUid = userItem.Uid;
 
-                _messageBusClient.PublishUserDeletion(deleteUserDto);
+
+                _messageBusClient.PublishUserDeletion(userUid);
 
                 // Delete the user from the user repository
                 _repository.DeleteUser(userItem);
@@ -109,5 +107,6 @@ namespace UserService.Controllers
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
+
     }
 }

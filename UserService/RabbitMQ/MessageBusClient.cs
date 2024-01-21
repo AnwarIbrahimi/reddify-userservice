@@ -1,4 +1,5 @@
 ﻿using RabbitMQ.Client;
+using System;
 using System.Text;
 using System.Text.Json;
 using UserService.DTO;
@@ -23,7 +24,8 @@ namespace UserService.RabbitMQ
                 _connection = factory.CreateConnection();
                 _channel = _connection.CreateModel();
 
-                _channel.ExchangeDeclare(exchange: "trigger", type: ExchangeType.Fanout);
+                // Declare the queue
+                _channel.QueueDeclare(queue: "user_deletion_queue", durable: true, exclusive: false, autoDelete: false, arguments: null);
 
                 _connection.ConnectionShutdown += RabbitMQ_ConnectionShutDown;
 
@@ -34,9 +36,10 @@ namespace UserService.RabbitMQ
                 Console.WriteLine($"--> Could not connect to the Message Bus: {ex.Message}");
             }
         }
-        public void PublishUserDeletion(DeleteUserDTO deleteUserDto)
+
+        public void PublishUserDeletion(string deleteuser)
         {
-            var message = JsonSerializer.Serialize(deleteUserDto);
+            var message = JsonSerializer.Serialize(deleteuser);
             if (_connection.IsOpen)
             {
                 Console.WriteLine("--> RabbitMQ Connection Open, sending user deletion message...");
@@ -47,12 +50,13 @@ namespace UserService.RabbitMQ
                 Console.WriteLine("--> RabbitMQ connection is closed, not sending user deletion message");
             }
         }
-        private void SendMessage(string message, string routingKey)
+
+        private void SendMessage(string message, string queueName)
         {
             var body = Encoding.UTF8.GetBytes(message);
 
-            _channel.BasicPublish(exchange: "trigger",
-                routingKey: routingKey,
+            _channel.BasicPublish(exchange: "", // No exchange for direct-to-queue
+                routingKey: queueName,
                 basicProperties: null,
                 body: body);
             Console.WriteLine($"--> We have sent {message}");

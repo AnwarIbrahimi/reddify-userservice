@@ -11,7 +11,7 @@ using UserService.Data;
 namespace UserService.Migrations
 {
     [DbContext(typeof(UserContext))]
-    [Migration("20240112134555_InitialCreate")]
+    [Migration("20240121132943_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -36,11 +36,7 @@ namespace UserService.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Password")
+                    b.Property<string>("Uid")
                         .IsRequired()
                         .HasColumnType("text");
 

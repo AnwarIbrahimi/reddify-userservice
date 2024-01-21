@@ -5,6 +5,6 @@ namespace UserService.RabbitMQ
 {
     public interface IMessageBusClient
     {
-        void PublishUserDeletion(DeleteUserDTO deleteUserDto);
+        void PublishUserDeletion(string deleteuser);
     }
 }

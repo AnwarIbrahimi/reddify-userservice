@@ -10,6 +10,7 @@ namespace UserService.Data
         Users GetUserByID(int id);
         void CreateUser(Users user);
         void DeleteUser(Users user);
+        Users GetUserByUid(string uid);
 
     }
 }

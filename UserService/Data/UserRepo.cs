@@ -25,6 +25,11 @@ namespace UserService.Data
             _context.users.Remove(user);
         }
 
+        public Users GetUserByUid(string uid)
+        {
+            return _context.users.FirstOrDefault(u => u.Uid == uid);
+        }
+
         public IEnumerable<Users> GetAllUsers()
         {
             return _context.users.ToList();
