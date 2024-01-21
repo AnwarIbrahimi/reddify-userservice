@@ -4,7 +4,7 @@ metadata:
   name: user-service
 spec:
   selector:
-    app: userservice  # Adjusted to match the correct label
+    app: userservice  
   ports:
     - protocol: TCP
       port: 5118
@@ -14,7 +14,7 @@ spec:
       port: 7118
       targetPort: 443
       name: https-port
-  type: LoadBalancer
+  type: ClusterIP
 
 
 
